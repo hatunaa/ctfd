@@ -12,9 +12,9 @@ Dạo vòng quanh web thì thấy có endpoint  `/demo` có thể truy cập, vi
 
 Các hình ảnh đều theo format qrcode. Thử truy cập vào ảnh, ở image-00.png và image-01.png  parsed các đoạn text phần nào gợi ý rằng flag sẽ nằm ở đâu đấy sau khi decode bức ảnh nào đấy   :vv
 
-![1.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902223732773.png)
+![1.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/1.png)
 
-![2.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902223749916.png)
+![2.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/2.png)
 
 Số 14 trong phần ` /demo`, truy cập vào cũng ra 1 ảnh dạng qrcode. Ok lại decode thôi, ở đây text sẽ là  `the real challenge: /ch4ll3ng3/` và đây là endpoit để ra được flag.
 
@@ -65,11 +65,11 @@ với IEFE
 
 Lỗ hổng trong thử thách là giá trị cookie trong yêu cầu HTTP.  Bây giờ có thể khai thác hàm unserialize() trong module node-serialize nếu dữ liệu không đáng tin cậy được truyền vào. Khai thác lỗ hổng để tạo một Reverse Shell.
 
-![3.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902231321304.png)
+![3.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/3.png)
 
 --> base64 decode:
 
-![4.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902231359395.png)
+![4.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/4.png)
 
 
 
@@ -83,7 +83,7 @@ Tạo một đường hầm ngrok TCP để nat ip với port ra ngoài
 
 output:
 
-![5.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902233006869.png)
+![5.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/5.png)
 
 Ở đây mình dùng [nodejsshell.py](https://github.com/ajinabraham/Node.Js-Security-Course/blob/master/nodejsshell.py) để tạo reverse shell.
 
@@ -108,23 +108,23 @@ var serialize = require(‘node-serialize’);
 console.log(“Serialized: \n” + serialize.serialize(y)); 
 ```
 
-![6.png](https://www.yeahhub.com/wp-content/uploads/2018/08/nodejs-deserialization-attack-11.png)
+![6.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/6.png)
 
 Chèn payload trong dấu ngoặc nhọn **{** *eval (String.from ………* **}** như hình dưới đây: 
 
-![image-20210902234442851](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902234442851.png)
+![7.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/7.png)
 
 Lưu tệp dưới dạng **mining.js** và chạy bằng lệnh node tạo ra payload serialized  được hiển thị bên dưới: 
 
-![7.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902234750466.png)
+![8.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/8.png)
 
 Bây giờ quay lại BurpSuite và điều hướng đến tab decoder và paste mã  đầu ra ở trên vào text để và encode base64, các bạn hãy thêm [dấu ngoặc IIFE ](http://benalman.com/news/2010/11/immediately-invoked-function-expression/)() sau nội dung hàm như hình dưới đây: 
 
-![8.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902235355933.png)
+![9.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/9.png)
 
 Trong tab Repeater, bạn cần thay thế giá trị cookie bằng giá trị được mã hóa base64 mà chúng ta đã tạo từ bước trên và sau đó nhấp  *Send*.
 
-![9.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210902235840325.png)
+![10.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/10.png)
 
 Bên cạnh đó, các bạn có thể set lại dịch vụ netcat của bạn đang listen có trên cùng một port không, tức là 8083 (cùng một cổng cho payload reverse shell )
 
@@ -134,7 +134,7 @@ Lệnh: nc -nlvp 8083
 
 Ngay sau khi nhấp vào Send, request sẽ được gửi đến máy chủ hiển thị 200 OK và kết nối thành công trên  port 8083 lúc này tiến hành reverse shell để lấy flag
 
-![10.png](C:\Users\ADMIN\AppData\Roaming\Typora\typora-user-images\image-20210903000701727.png)
+![11.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/11.png)
 
 Flag ở trong file Dockerfile, cat ra sẽ thấy liền :vv
 
