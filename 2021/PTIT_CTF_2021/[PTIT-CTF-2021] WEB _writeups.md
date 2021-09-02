@@ -126,7 +126,7 @@ Trong tab Repeater, bạn cần thay thế giá trị cookie bằng giá trị �
 
 ![10.png](https://github.com/hatunaa/ctf-writeups/blob/master/2021/PTIT_CTF_2021/images/10.png)
 
-Bên cạnh đó, các bạn có thể set lại dịch vụ netcat của bạn đang listen có trên cùng một port không, tức là 8083 (cùng một cổng cho payload reverse shell )
+Bên cạnh đó, các bạn có thể set lại công cụ netcat của bạn đang listen có trên cùng một port không, tức là 8083 (cùng một cổng cho payload reverse shell )
 
 ```
 Lệnh: nc -nlvp 8083
