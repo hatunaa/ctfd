@@ -1,3 +1,5 @@
-# This is where I write-ups some of the challenges and some of the CTF tournaments I played, mainly the WEB challenges. 
+# Capture The Flag
+
+Welcome to my repository where you will find all of my write-ups for various CTF competitions.
 
 [How to write a good write-ups](http://pequalsnp-team.github.io/cheatsheet/writing-good-writeup)
