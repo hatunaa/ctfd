@@ -13,7 +13,7 @@ I played the first challenge `web/bouncy-box` challenge. Because of my habit, I 
 This game is extremely fun. So fun that some people have been playing it for over 3 years!
 
 ### Summary
-Brute-force username and password to get flag.
+SQL injection after inject `hatuna' or '1'='1'-- -`. Using brute-force username and password to get flag.
 [script](https://github.com/hatunaa/ctf-writeups/edit/master/damCTF/bouncy-box.py)
 
 ## Flag
