@@ -52,7 +52,7 @@ if x[0:4] == "open" or x[0:4] == "eval":
 
 Chỉ sử dụng các ký tự trong danh sách cho phép là không đủ để tạo ra payload khai thác, 
 vì vậy phải làm thế nào để mở rộng bảng chữ cái của mình bằng cách sử dụng số học cơ bản và bộ lọc jinja để chuyển đổi chuỗi.
-Trong jinja các biến có thể được sửa đổi bằng bộ lọc . Các bộ lọc được tách ra khỏi biến bởi một ký hiệu ống ( | ) và có thể có các đối số tùy chọn trong dấu ngoặc đơn. 
+Trong jinja các biến có thể được sửa đổi bằng bộ lọc . Các bộ lọc được tách ra khỏi biến bởi một ký tự `|`  và có thể có các đối số tùy chọn trong dấu ngoặc đơn. 
 Nhiều bộ lọc có thể được xâu chuỗi. Đầu ra của một bộ lọc là áp dụng cho tiếp theo. 
 
 Ví dụ, {{ name|striptags|title }}sẽ xóa tất cả các thẻ HTML khỏi biến name và title-case và đầu ra sẽ xử lí như sau ( title(striptags(name))).
