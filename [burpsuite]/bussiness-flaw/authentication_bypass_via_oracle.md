@@ -69,7 +69,7 @@ Sau đó đưa giá trị notification vào phẩn decode và mã hóa như các
 ```
 %66%4c%4b%59%4d%76%63%6b%43%47%32%31%65%32%41%70%48%6b%6e%51%64%31%51%42%48%78%4a%74%49%4b%4d%4d%50%68%71%79%74%78%69%6d%65%37%59%3d
 ```
-Dùng mã trên để thay thế giá trị của notification và chúng ta có phần mã hóa như sau
+Dùng mã trên để thay thế giá trị của notification và chúng ta có phần giải mã như sau
 ```
 <header class="notification-header">
 administrator:1652097711395         
