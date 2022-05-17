@@ -1,6 +1,6 @@
 # SSRF
  
- ![image](https://user-images.githubusercontent.com/68894302/168491975-142046e7-d00b-4f93-bfbc-d63668827917.png)
+![image](https://user-images.githubusercontent.com/68894302/168878073-3bfd2ce3-d68e-4f5a-b819-53577a44ff75.png)
 
  
 ## Lab: Basic SSRF against the local server
