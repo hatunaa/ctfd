@@ -10,7 +10,7 @@ Trước tiên cần phân biệt internal entity và external entity:
 
 **external entity**: Nếu một entity được khai báo ngoài DTD thì nó được gọi là external entity
 
-> Syntax: `<!ENTITY entity_name SYSTEM "entity_value">
+> Syntax: `<!ENTITY entity_name SYSTEM "entity_value">`
 
 ----
 
