@@ -411,11 +411,11 @@ ${alert()}
 --- 
 
 ## Lab: Reflected XSS in a JavaScript URL with some characters blocked
-[Here]()
+[Here](https://github.com/hatunaa/ctfd/blob/master/web-academy-portswigger/XSS/Lab%20Reflected%20XSS%20in%20a%20JavaScript%20URL%20with%20some%20characters%20blocked.md)
 
 
 ## Lab: Reflected XSS with AngularJS sandbox escape and CSP
-[Here]()
+[Here](https://github.com/hatunaa/ctfd/blob/master/web-academy-portswigger/XSS/Reflected%20XSS%20with%20AngularJS%20sandbox%20escape%20and%20CSP.md)
 
 ## Lab: Reflected XSS with AngularJS sandbox escape without strings
-[Here]()
+[Here](https://github.com/hatunaa/ctfd/blob/master/web-academy-portswigger/XSS/Reflected%20XSS%20with%20AngularJS%20sandbox%20escape%20without%20strings.md)
