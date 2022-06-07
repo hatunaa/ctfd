@@ -137,7 +137,7 @@ https://acd51f871f0b90a2c0746c2f008c00e1.web-security-academy.net/?search=%3Ca+h
 
 (https://acd51f871f0b90a2c0746c2f008c00e1.web-security-academy.net/?search=<a href="https://14.rs">Click</a>)
 ```
-Nhưng thẻ `<animate>` có một số thuộc tính rất là `attributeName` và `values` để tạo hoạt ảnh cho phần tử theo sạng sau
+Nhưng thẻ `<animate>` có một số thuộc tính là `attributeName` và `values` để tạo hoạt ảnh cho phần tử theo sạng sau
 ```
 <svg viewBox="0 0 10 10" xmlns="http://www.w3.org/2000/svg">
   <rect width="10" height="10">
@@ -150,7 +150,7 @@ Payload:
 ```
 "><svg >
   <a width=10 height=10>
-    <animate attributeName="href" values="javascript:alert()" />
+    <animate attributeName="href" values="javascript:alert()">
     <text>Click</text>
   </a>
 </svg>
@@ -221,7 +221,7 @@ $(function() {
 Thuộc tính href để chỉ định path hoặc url mà chúng ta có thể chuyển đến
 ![image](https://user-images.githubusercontent.com/68894302/170914559-fa694026-57b3-4f85-b13b-f679f6dc62b5.png)
 
-Có thể thực hiejn redirect để có thể thực thi mã tùy ý bằng cách `javascript:alert()`
+Có thể thực hiện việc redirect để có thể thực thi mã tùy ý bằng cách sử dụng `javascript:alert()`
 ![image](https://user-images.githubusercontent.com/68894302/170915110-e0b38412-b6d3-4cab-b603-a15fbe50001a.png)
 
 ---
@@ -411,8 +411,11 @@ ${alert()}
 --- 
 
 ## Lab: Reflected XSS in a JavaScript URL with some characters blocked
-Link: https://portswigger.net/web-security/cross-site-scripting/contexts/lab-javascript-url-some-characters-blocked
+[Here]()
 
->  This lab reflects your input in a JavaScript URL, but all is not as it seems. This initially seems like a trivial challenge; however, the application is blocking some characters in an attempt to prevent XSS attacks.
-To solve the lab, perform a cross-site scripting attack that calls the alert function with the string 1337 contained somewhere in the alert message. 
 
+## Lab: Reflected XSS with AngularJS sandbox escape and CSP
+[Here]()
+
+## Lab: Reflected XSS with AngularJS sandbox escape without strings
+[Here]()
