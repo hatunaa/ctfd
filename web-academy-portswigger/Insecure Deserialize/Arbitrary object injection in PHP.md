@@ -10,7 +10,7 @@ Sau khi truy cập vào entrypoint` /libs/CustomTemplate.php` thì không có g�
 
 Mở code trong trình editor để phân tích cho rõ hơn
 
-![image-20220708232730998](C:/Users/tuandv/AppData/Roaming/Typora/typora-user-images/image-20220708232730998.png)
+![image](https://user-images.githubusercontent.com/68894302/178042160-cbb3751f-b6bd-42da-bbad-901c080c0867.png)
 
 Thông thường với một bài PHP deserialize thì phải có một trong hai phương thức sau: **__wakeup()**, **__destruct()**  thường được gọi là magic method (phương thức ma thuật) để xử lí dữ liệu người dùng, người dùng có thể chèn dữ liệu tùy ý vào hàm `unserialize()`.
 
