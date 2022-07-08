@@ -44,4 +44,4 @@ Giải thích một chút các phần tử trong payload này như sau:
 + O:14:"CustomTemplate":1: đối tượng CustomTemplate với chiều dài 14 kí tự, có 1 thuộc tính 
 + s:14:"lock_file_path";s:23:"/home/carlos/morale.txt" : thuộc tính lock_file_path có độ dài 14 kí tự và giá trị của nó là /home/carlos/morale.txt dài 23 kí tự
 
-![image-20220709000853511](C:/Users/tuandv/AppData/Roaming/Typora/typora-user-images/image-20220709000853511.png)
+![image](https://user-images.githubusercontent.com/68894302/178042456-3a547f59-e799-48c6-a479-01fa8854e6ba.png)
