@@ -29,7 +29,7 @@ Vậy thì làm thế nào để inject vào file này trong khi $lock_file_path
 
 ## Khai thác
 
-Cookie sẽ trả về cho chúng ta ở dạng serialized như sau:
+Cookie sẽ trả về cho chúng ta ở dạng serialize như sau:
 
 ![image](https://user-images.githubusercontent.com/68894302/178037324-dd7ad5ff-9820-4f7c-8c78-6bd5395e0af7.png)
 
