@@ -29,7 +29,7 @@ Vậy thì làm thế nào để inject vào file này trong khi $lock_file_path
 
 ## Khai thác
 
-Cookie sẽ trả về cho chúng ta ở dạng serialized như sau:
+Cookie sẽ trả về cho chúng ta ở dạng serialize như sau:
 
 ![image](https://user-images.githubusercontent.com/68894302/178037324-dd7ad5ff-9820-4f7c-8c78-6bd5395e0af7.png)
 
@@ -44,4 +44,8 @@ Giải thích một chút các phần tử trong payload này như sau:
 + O:14:"CustomTemplate":1: đối tượng CustomTemplate với chiều dài 14 kí tự, có 1 thuộc tính 
 + s:14:"lock_file_path";s:23:"/home/carlos/morale.txt" : thuộc tính lock_file_path có độ dài 14 kí tự và giá trị của nó là /home/carlos/morale.txt dài 23 kí tự
 
+<<<<<<< HEAD
 ![image](https://user-images.githubusercontent.com/68894302/178042456-3a547f59-e799-48c6-a479-01fa8854e6ba.png)
+=======
+![image](https://user-images.githubusercontent.com/68894302/178042456-3a547f59-e799-48c6-a479-01fa8854e6ba.png)
+>>>>>>> 4c410c5dce1ead8d9dafcbefbe4d8c229374d4ab
