@@ -48,4 +48,4 @@ Và lúc này nếu Click next chính là xác nhận xóa tài khoản.
 
 Vì thế cần thuyết phục người dùng nhấp hai lần. Trong thực tế, biết được hành vi của người dùng thông thường sẽ rất quan trọng để thuyết phục họ không chỉ nhấp chuột mà còn cả thứ tự nhấp chuột
 
-![image-20220623115040451](C:/Users/tuandv/AppData/Roaming/Typora/typora-user-images/image-20220623115040451.png)
+![image](https://user-images.githubusercontent.com/68894302/178257737-59d628e8-1238-435f-9041-4cbf1436d665.png)
