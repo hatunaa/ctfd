@@ -292,7 +292,8 @@ thuộc tính `accesskey` để giúp người dùng khi nhấn tổ hợp phím
 ---
 ## Lab: DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded
 Khi thử tìm kiếm các tag ở phần view source thấy rằng các kí tự như `< > / ` bị encode url, nên có thể sử dụng angularJS expression
-Cú pháp của nó như sau
+Cú pháp của nó như sau:
+
 ![image](https://user-images.githubusercontent.com/68894302/171048235-6e8d06a2-7c43-43ac-a9eb-52489588b9da.png)
 
 Nội dung toàn bộ phần đoạn mã được thực hiện bên trong 2 cặp ngoặc nhọn.
