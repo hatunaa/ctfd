@@ -6,7 +6,7 @@ __Xác định vấn đề__
 
 + Đầu tiên thay đổi đầu vào với __blog_post_author_display__, xác định 2 vấn đề: không thể thực thi xss và traceback trả lại thông báo lỗi của ứng dụng tornado (python)
 
-  ![image-20220718001812580](C:/Users/tuandv/AppData/Roaming/Typora/typora-user-images/image-20220718001812580.png)
+![image-20220718001812580](https://user-images.githubusercontent.com/68894302/179419328-74f46c91-2d58-4fe9-9951-e22a34063185.png)
 
 + Đầu ra kết quả được render tại __user.firstname__ nếu choice option là `firstname`, hoặc cũng có thể là `name`, `nickname`. 
 
