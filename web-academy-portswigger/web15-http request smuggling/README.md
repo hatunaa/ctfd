@@ -8,17 +8,17 @@ Tuy nhiên, nhiều khi các request chỉ xác thực phía Front-end mà bỏ 
 
 ![image](https://user-images.githubusercontent.com/68894302/182903778-ddbc7ee1-7ffc-46f0-89c4-509f47d3f6a2.png)
 
-Điều này cung cấp cho kẻ tấn công khả năng thêm nội dung tùy ý khi bắt đầu yêu cầu của người dùng hợp pháp tiếp theo. Trong cách tấn công này smuggled content sẽ được gọi là __prefix__ và được đánh dấu bằng màu da cam
+Điều này cung cấp cho hacker khả năng thêm nội dung tùy ý khi bắt đầu yêu cầu của người dùng hợp pháp tiếp theo. Trong cách tấn công này smuggled content sẽ được gọi là __prefix__ và được đánh dấu bằng màu da cam
 
 Ví dụ front-end ưu tiên header Content-Length đầu tiên và back-end ưu tiên thứ hai. Từ quan điểm của back-end, luồng TCP có thể trông giống như sau:
 
 ![image](https://user-images.githubusercontent.com/68894302/182904876-040098ad-3904-4854-88c9-7644e933b44b.png)
 
-Front-end sẽ forward dữ liệu màu xanh lam và da cam trước khi đưa ra phản hồi. Điều này làm cho back-end socket bị poisoning với dữ liệu màu da cam. hi yêu cầu hợp pháp màu xanh lá cây đến, nó sẽ được thêm vào nội dung màu cam, gây ra phản hồi không mong muốn.
+Front-end sẽ forward dữ liệu màu xanh lam và da cam trước khi đưa ra phản hồi. Điều này làm cho back-end socket bị poisoning với dữ liệu màu da cam. Khi yêu cầu hợp pháp màu xanh lá cây đến, nó sẽ được thêm vào nội dung màu cam, gây ra phản hồi không mong muốn.
 
-Trong ví dụ này, 'G' được chèn vào sẽ làm hỏng yêu cầu của người dùng màu xanh lá cây và họ có thể sẽ nhận được phản hồi dọc theo dòng "Unknown method GPOST".
+Trong ví dụ này, 'G' được chèn vào sẽ làm hỏng yêu cầu của người dùng màu xanh lá cây và họ có thể sẽ nhận được phản hồi với "Unknown method GPOST".
 
-Trong real world, kỹ thuật Content-Length kép hiếm khi hoạt động vì nhiều hệ thống từ chối hợp lý các yêu cầu có nhiều tiêu đề độ dài nội dung. Thay vào đó, chúng ta sẽ tấn công các hệ thống bằng cách sử dụng mã hóa phân đoạn - đã có thông số kỹ thuật [RFC2616](https://datatracker.ietf.org/doc/html/rfc2616#section-4.4): 
+Trong real world, kỹ thuật Content-Length kép hiếm khi hoạt động vì nhiều hệ thống từ chối hợp lý các yêu cầu có nhiều tiêu đề Content-Length. Thay vào đó, chúng ta sẽ tấn công các hệ thống bằng cách sử dụng mã hóa phân đoạn (chucked) - đã có thông số kỹ thuật trong [RFC2616](https://datatracker.ietf.org/doc/html/rfc2616#section-4.4): 
 
 "__If a message is received with both a Transfer-Encoding header field and a Content-Length header field, the latter MUST be ignored__ "
 
@@ -26,9 +26,8 @@ Trong real world, kỹ thuật Content-Length kép hiếm khi hoạt động vì
 
 ...
 
------
+---
 
-Refer [James Kettle](https://portswigger.net/research/james-kettle)     
+Refer [James Kettle](https://portswigger.net/research/james-kettle)
 
 https://portswigger.net/research/http-desync-attacks-request-smuggling-reborn
-

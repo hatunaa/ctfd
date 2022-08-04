@@ -2,7 +2,11 @@
 
 The header **`X-Cache`** in the response could be very useful as it may have the value __miss__ when the request wasn't cached and the value __hit__ when it is cached
 
+<<<<<<< HEAD
 ![image-20220731024714976](https://user-images.githubusercontent.com/68894302/182420347-02bf60f2-977b-4408-a2e3-c1e8b49813f2.png)
+=======
+![image-20220731024714976](https://user-images.githubusercontent.com/68894302/182009970-d525312c-cfb2-4e4f-ae2a-d3a9866b4d99.png)
+>>>>>>> 12d207656df7fdf0d4d97bfc655e2e4018ad45d3
 
 Unable to change Host header
 
