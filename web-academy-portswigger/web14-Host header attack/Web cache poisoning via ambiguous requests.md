@@ -2,7 +2,7 @@
 
 The header **`X-Cache`** in the response could be very useful as it may have the value __miss__ when the request wasn't cached and the value __hit__ when it is cached
 
-![image-20220731024714976](C:/Users/tuandv/AppData/Roaming/Typora/typora-user-images/image-20220731024714976.png)
+![image-20220731024714976](https://user-images.githubusercontent.com/68894302/182420347-02bf60f2-977b-4408-a2e3-c1e8b49813f2.png)
 
 Unable to change Host header
 

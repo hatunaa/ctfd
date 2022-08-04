@@ -17,8 +17,3 @@ Delete user carlos, and the challenge is complete.
 ![image](https://user-images.githubusercontent.com/68894302/181968375-03c0ee83-075c-4bd9-878d-188abebe0676.png)
 
 ![image](https://user-images.githubusercontent.com/68894302/181969239-b1381c67-b6cd-4a4b-bbcd-227c3b948b0f.png)
-
-
-
-
-
